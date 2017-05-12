@@ -1,18 +1,25 @@
-# Staged Git Files
+# Changed Git Files
 
-This module returns an array of staged files and their status acording to git.
+This module returns an array of changed files and their status according to git.
+
+## Credit
+
+This repository is almost complete copy of @mcwhittemore staged-git-files repo.
+https://github.com/mcwhittemore/staged-git-files
+
+The only difference is, that this command also returns files, that was modified, but not added to commit.
 
 ## Usage
 
 **Download**
 
-`npm install staged-git-files`
+`npm install changed-git-files`
 
 **In Code**
 
 ```
-var sgf = require("staged-git-files");
-sgf(function(err, results){
+var cgf = require("changed-git-files");
+cgf(function(err, results){
 	//WHAT EVER YOU SO PLEASE
 });
 ```
@@ -38,16 +45,16 @@ sgf(function(err, results){
 
 ## API
 
-### sgf(filter, callback)
+### cgf(filter, callback)
 
-Get a list of staged git files
+Get a list of changed git files
 
 * filter: string of git status codes. No spaces
 * callback:
 	* err: the error
 	* results: file object array.
 
-### sgf.getHead(callback)
+### cgf.getHead(callback)
 
 Get head that will be used in the diff to ID which files are waiting to be staged.
 
@@ -55,23 +62,23 @@ Get head that will be used in the diff to ID which files are waiting to be stage
 	* err: the error
 	* head: the git commit id which is aliased to head.
 
-### sgf.readFile(filename, [options], callback)
+### cgf.readFile(filename, [options], callback)
 
-This is a proxy for [fs.readFile](http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback) with one change. The filename will be relative to the `sgf.cwd`
+This is a proxy for [fs.readFile](http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback) with one change. The filename will be relative to the `cgf.cwd`
 
-### sgf.debug
+### cgf.debug
 
 Boolean that flips logging on and off. By default this is false. If true, all git commands will be console logged.
 
-### sgf.includeContent
+### cgf.includeContent
 
 If true, include content will add a `content` or `err` param to the file object.
 
 * Default Value: false
-* Content Param: the content of the file staged
+* Content Param: the content of the file changed
 * Err Param: the error message received while trying to read the file.
 
-### sgf.cwd
+### cgf.cwd
 
 The current working directory. AKA: where the .git folder you care about is.
 
@@ -79,7 +86,7 @@ The current working directory. AKA: where the .git folder you care about is.
 
 ## Statuses
 
-**SGF-Status (git status code)**
+**CGF-Status (git status code)**
 
 * Added (A)
 * Copied (C)
@@ -94,7 +101,7 @@ The current working directory. AKA: where the .git folder you care about is.
 
 ### 0.0.2
 
-* sgf.includeContent added. Now it is possible to also get the file content
+* cgf.includeContent added. Now it is possible to also get the file content
 
 ### 0.0.1
 
